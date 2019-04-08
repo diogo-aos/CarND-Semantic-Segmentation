@@ -1,5 +1,8 @@
 import tensorflow as tf
 
+USE_SCALING = False
+USE_REGULIZER = False
+
 def load_vgg(sess, vgg_path):
     """                                                                                                                                                                 
     Load Pretrained VGG Model into TensorFlow.                                                                                                                          
@@ -50,8 +53,9 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     #   upsample Part2 8x
     
     # scaling layers
-    vgg_layer3_out = tf.multiply(vgg_layer3_out, 0.0001, name='pool3_out_scaled')
-    vgg_layer4_out = tf.multiply(vgg_layer4_out, 0.01, name='pool4_out_scaled')
+    if USE_SCALING:
+        vgg_layer3_out = tf.multiply(vgg_layer3_out, 0.0001, name='pool3_out_scaled')
+        vgg_layer4_out = tf.multiply(vgg_layer4_out, 0.01, name='pool4_out_scaled')
     
     # TODO: Implement function
     # 1 by 1 convolution from VGG output
@@ -132,6 +136,12 @@ def optimize(nn_last_layer, correct_label, learning_rate, num_classes):
     correct_label = tf.reshape(correct_label, (-1,num_classes))
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=correct_label, name='cross_entropy')
     loss_operation = tf.reduce_mean(cross_entropy, name='loss')
+
+    if USE_REGULIZER:
+        reg_constant = 1
+        reg_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
+        loss_operation = loss_operation + reg_constant * sum(reg_losses)
+    
     optimizer = tf.train.AdamOptimizer(learning_rate = learning_rate)
     train_op = optimizer.minimize(loss_operation)
     return logits, train_op, loss_operation

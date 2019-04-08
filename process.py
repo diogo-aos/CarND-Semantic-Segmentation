@@ -1,27 +1,23 @@
-import os.path
+import os
+import subprocess as sp
+import shutil
+import argparse
+from datetime import datetime
+import glob
+
 import tensorflow as tf
 import helper
 import warnings
 from distutils.version import LooseVersion
 import project_tests as tests
 
-print(tests)
-
-import os
 import matplotlib.pyplot as plt
-import subprocess as sp
-from datetime import datetime
 from tqdm import tqdm
 import cv2
 import numpy as np
-import shutil
 import scipy
-import subprocess as sp
 
 from model import *
-
-
-import argparse
 
 parser = argparse.ArgumentParser(description='process video')
 parser.add_argument('model_dir', type=str,
@@ -35,19 +31,18 @@ args = parser.parse_args()
 if not os.path.exists(args.model_dir):
     print('model path does not exist')
     sys.exit(1)
-    
+
 if not os.path.isdir(args.model_dir):
     print('model path is not directory')
     sys.exit(1)
 
-if not os.path.exists(os.path.join(args.model_dir, 'model.ckpt.index')):
-    print('directory does not have model (model.ckpt.index) inside')
+videos = []
+for p in args.videos:
+    videos.extend(glob.glob(p))
+    
+if not videos:
+    print('no valid video paths')
     sys.exit(1)
-
-for v in args.videos:
-    if not os.path.exists(v):
-        print('video {} does not exist'.format(v))
-        sys.exit(1)
 
 
 def inference_on_image(sess, logits, keep_prob, image_input, image, image_shape):
@@ -84,16 +79,14 @@ def info_video(video_in_fn):
     cap = cv2.VideoCapture(video_in_fn)
     n_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
-    
     cap.release()
-    
     return n_frames, fps
 
 
 def load_video(video_in_fn):
     cap = cv2.VideoCapture(video_in_fn)
     # Check if camera opened successfully
-    if (cap.isOpened()== False): 
+    if (not cap.isOpened()):
         raise Exception("Error opening video stream or file")
 
     # Read until video is completed
@@ -107,13 +100,10 @@ def load_video(video_in_fn):
     # When everything done, release the video capture object
     cap.release()
 
-    
-def process_video(video_fn, model_dir, out_dir_param):
-    model_fn = os.path.join(model_dir, 'model.ckpt')
-    video_in_fn_suffix = video_fn.split('/')[-1]
-    video_in_fn_suffix = video_in_fn_suffix.split('.')[0]
-    video_out_fn = os.path.join(out_dir_param, 'processed_' + video_in_fn_suffix + '.avi')
-    video_out_fn_mp4 = os.path.join(out_dir_param, 'processed_' + video_in_fn_suffix + '.mp4')
+
+def process_video(video_fn, model_fn, video_out_fn):
+    video_out_fn_avi = video_out_fn + '.avi'
+    video_out_fn_mp4 = video_out_fn + '.mp4'
 
     n_frames, fps = info_video(video_fn)
     image_shape = (160, 576)
@@ -134,7 +124,7 @@ def process_video(video_fn, model_dir, out_dir_param):
         saver.restore(sess, model_fn)
 
         fourcc = cv2.VideoWriter_fourcc(*'MP42')
-        video_out = cv2.VideoWriter(video_out_fn, fourcc, float(fps), (width, height))
+        video_out = cv2.VideoWriter(video_out_fn_avi, fourcc, float(fps), (width, height))
 
         video_in = load_video(video_fn)
         pbar = tqdm(total=n_frames)
@@ -144,10 +134,23 @@ def process_video(video_fn, model_dir, out_dir_param):
             pbar.update(1)
 
         video_out.release()
-        
-    sp.Popen(['ffmpeg', '-y', '-i', video_out_fn, video_out_fn_mp4])
+
+    p = sp.Popen(['ffmpeg', '-y', '-i', video_out_fn_avi, video_out_fn_mp4])
+    p.wait()
+
+
+fls = os.listdir(args.model_dir)
+models = [p.rstrip('.index') for p in fls if p.endswith('.ckpt.index')]
+
 
 data_dir = './data'
-vgg_path = os.path.join(data_dir, 'vgg')   
-for v_fn in args.videos:
-    process_video(v_fn, args.model_dir, args.model_dir)
+vgg_path = os.path.join(data_dir, 'vgg')
+
+for model in models:
+    model_fn = os.path.join(args.model_dir, model)
+    for v_fn in videos:
+        video_name = v_fn.split('/')[-1]
+        video_name = video_name.split('.')[0]
+        video_out_fn = os.path.join(args.model_dir, 'processed_{}_{}'.format(model.rstrip('.ckpt'), video_name))
+
+        process_video(v_fn, model_fn, video_out_fn)
