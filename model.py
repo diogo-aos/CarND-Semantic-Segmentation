@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-USE_SCALING = False
+USE_SCALING = True
 USE_REGULIZER = False
 
 def load_vgg(sess, vgg_path):

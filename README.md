@@ -34,6 +34,10 @@ Model C = 04_04_2019__15_14
 
 ![Model C](report/04_inference.gif?raw=true "Title")
 
+The best results were produced by *model B*.
+*Model A* produced similar results, but the labeled pixels were more disperse.
+*Model C* produced results with 
+
 ### Collected video
 #### Foz
 ![Model A](report/05_processed_model50_foz_crop.gif?raw=true "Title")
@@ -48,30 +52,3 @@ Model C = 04_04_2019__15_14
 ## Considerations
 
 
-### Start
-##### Implement
-Implement the code in the `main.py` module indicated by the "TODO" comments.
-The comments indicated with "OPTIONAL" tag are not required to complete.
-##### Run
-Run the following command to run the project:
-```
-python main.py
-```
-**Note:** If running this in Jupyter Notebook system messages, such as those regarding test status, may appear in the terminal rather than the notebook.
-
-#### Example Outputs
-Here are examples of a sufficient vs. insufficient output from a trained network:
-
-Sufficient Result          |  Insufficient Result
-:-------------------------:|:-------------------------:
-![Sufficient](./examples/sufficient_result.png)  |  ![Insufficient](./examples/insufficient_result.png)
-
-### Submission
-1. Ensure you've passed all the unit tests.
-2. Ensure you pass all points on [the rubric](https://review.udacity.com/#!/rubrics/989/view).
-3. Submit the following in a zip file.
- - `helper.py`
- - `main.py`
- - `project_tests.py`
- - Newest inference images from `runs` folder  (**all images from the most recent run**)
- 

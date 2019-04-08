@@ -104,6 +104,8 @@ RUNS/
 
 
 *#*
+*~
 data/
-runs/
+runs/*
+!runs/final
 results/
