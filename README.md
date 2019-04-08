@@ -10,11 +10,6 @@ Download the [Kitti Road dataset](http://www.cvlibs.net/datasets/kitti/eval_road
 
 ## Architecture
 
-crop
-no crop
-regulizer
-no regulizer
-
 ## Parameters
 
 Model A = 05_04_2019__10_25
@@ -31,18 +26,24 @@ Model C = 04_04_2019__15_14
 | Regulizer     | No      | No      | Yes     |
 
 
+## Results
+### Dataset
 ![Model A](report/05_inference.gif?raw=true "Title")
 
 ![Model B](report/03_inference.gif?raw=true "Title")
 
 ![Model C](report/04_inference.gif?raw=true "Title")
 
-## Results
-### Dataset
-
 ### Collected video
-foz
-neuronios
+#### Foz
+![Model A](report/05_processed_model50_foz_crop.gif?raw=true "Title")
+![Model B](report/03_processed_model50_foz_crop.gif?raw=true "Title")
+![Model C](report/04_processed_model50_foz_crop.gif?raw=true "Title")
+
+#### Neuronios
+![Model A](report/05_processed_model50_neuronios_crop.gif?raw=true "Title")
+![Model B](report/03_processed_model50_neuronios_crop.gif?raw=true "Title")
+![Model C](report/04_processed_model50_neuronios_crop.gif?raw=true "Title")
 
 ## Considerations
 
