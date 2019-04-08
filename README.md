@@ -17,7 +17,18 @@ no regulizer
 
 ## Parameters
 ### 05_04_2019__10_25
-epochs=50
+
+| Parameter     | Value |
+| ---------     | ----- |
+| Epochs        | 50    |
+| Learning rate | 0.001 |
+| Dropout rate  | 0.5   |
+| Batch size    | 10    |
+| Scaling layer | No    |
+| Regulizer     | No    |
+
+
+Epochs=50
 learning_rate=0.001
 drpout_rate = 0.5
 batc-size = 10
