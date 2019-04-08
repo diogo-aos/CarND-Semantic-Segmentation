@@ -23,6 +23,8 @@ drpout_rate = 0.5
 batc-size = 10
 no scaling no regulizer
 
+![no scaling, no regulizer](report/05_inference.gif?raw=true "Title")
+
 ### 03_04_2019__15_14
 epochs=50
 learning_rate=0.001
@@ -30,7 +32,7 @@ drpout_rate = 0.5
 batc-size = 10
 scaling, no regulizer
 
-![image](report/03_inference.gif?raw=true "Title")
+![scaling, no regulizer](report/03_inference.gif?raw=true "Title")
 
 ### 04_04_2019__15_14
 epochs=50
@@ -39,6 +41,7 @@ drpout_rate = 0.5
 batc-size = 10
 with scaling and regularization fixed
 
+![scaling, regulizer](report/04_inference.gif?raw=true "Title")
 
 ## Results
 ### Dataset
