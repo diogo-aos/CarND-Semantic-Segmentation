@@ -16,43 +16,26 @@ regulizer
 no regulizer
 
 ## Parameters
-### 05_04_2019__10_25
 
-| Parameter     | Value |
-| ---------     | ----- |
-| Epochs        | 50    |
-| Learning rate | 0.001 |
-| Dropout rate  | 0.5   |
-| Batch size    | 10    |
-| Scaling layer | No    |
-| Regulizer     | No    |
+Model A = 05_04_2019__10_25
+Model B = 03_04_2019__15_14
+Model C = 04_04_2019__15_14
+
+| Parameter     | Model A | Model B | Model C |
+| ---------     | -----   | ------- | ------- |
+| Epochs        | 50      | 50      | 50      |
+| Learning rate | 0.001   | 0.001   | 0.001   |
+| Dropout rate  | 0.5     | 0.5     | 0.5     |
+| Batch size    | 10      | 10      | 10      |
+| Scaling layer | No      | Yes     | Yes     |
+| Regulizer     | No      | No      | Yes     |
 
 
-Epochs=50
-learning_rate=0.001
-drpout_rate = 0.5
-batc-size = 10
-no scaling no regulizer
+![Model A](report/05_inference.gif?raw=true "Title")
 
-![no scaling, no regulizer](report/05_inference.gif?raw=true "Title")
+![Model B](report/03_inference.gif?raw=true "Title")
 
-### 03_04_2019__15_14
-epochs=50
-learning_rate=0.001
-drpout_rate = 0.5
-batc-size = 10
-scaling, no regulizer
-
-![scaling, no regulizer](report/03_inference.gif?raw=true "Title")
-
-### 04_04_2019__15_14
-epochs=50
-learning_rate=0.001
-drpout_rate = 0.5
-batc-size = 10
-with scaling and regularization fixed
-
-![scaling, regulizer](report/04_inference.gif?raw=true "Title")
+![Model C](report/04_inference.gif?raw=true "Title")
 
 ## Results
 ### Dataset
