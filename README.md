@@ -5,13 +5,18 @@ A Fully Convolutional Network (FCN) was used.
 
 
 ## Dataset
-Download the [Kitti Road dataset](http://www.cvlibs.net/datasets/kitti/eval_road.php) from [here](http://www.cvlibs.net/download.php?file=data_road.zip).  Extract the dataset in the `data` folder.  This will create the folder `data_road` with all the training a test images.
+The model was trained with the [Kitti Road dataset](http://www.cvlibs.net/datasets/kitti/eval_road.php).
+2 videos were recorded using 20MP Sony Exmor RS sensor.
+Both videos were recorded with the phone handheld.
+The windshield is dirty on both videos.
+These videos are called `Foz` and `Neuronios`.
 
 
 ## Architecture
 Essentially, this project reproduced the architecture of the original paper [Fully Convolutional Networks for Semantic Segmentation](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf).
 X.
-A VGG16 network pre-trained on ImageNet was converted to a Fully Convolutional Network.
+A VGG16 network pre-trained on ImageNet was converted to a Fully Convolutional Network.cd P2/CarND-Semantic-Segmentation/; emacs
+
 The last fully connected layers were replaced by 1x1 convolutions with depth equal to the number of classes (in this case 2, road/not-road).
 Afterwards, transposed convolutions are used for upsampling.
 Inbetween transposed convolutions, skip layers are used by adding 1x1 convolutions of layers from VGG16.
@@ -86,10 +91,7 @@ The best results were produced by *model B*.
 *Model C* produced results with a lot more false positives.
 
 ### Collected video
-2 videos were recorded using 20MP Sony Exmor RS sensor.
-Both videos were recorded with the phone handheld.
-The windshield is dirty on both videos.
-These videos are called `Foz` and `Neuronios`.
+
 The light differs significantly on both videos.
 The performance of the three models above in both videos can be seen in this [Youtube video](https://youtu.be/0TAYRCinuVs).
 
