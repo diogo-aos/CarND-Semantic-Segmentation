@@ -9,6 +9,41 @@ Download the [Kitti Road dataset](http://www.cvlibs.net/datasets/kitti/eval_road
 
 
 ## Architecture
+Essentially, this project reproduced the architecture of X.
+A VGG16 network pre-trained on ImageNet was converted to a Fully Convolutional Network.
+The last fully connected layers were replaced by 1x1 convolutions with depth equal to the number of classes (in this case 2, road/not-road).
+Afterwards, transposed convolutions are used for upsampling.
+Inbetween transposed convolutions, skip layers are used by adding 1x1 convolutions of layers from VGG16.
+A kernel regulizer was added to each convolution and transposed convolution.
+Different values for this regularization were tried.
+The final, better performing model, does not include these regulizers in the loss function.
+
+## Implementation
+The model is implemented in `model.py`.
+To use it, we only need to import this module's functions.
+The unit tests are still executed in `main.py`.
+The model parameters are now received as command line arguments.
+The available arguments are: epochs, dropout rate, learning rate, batch size, directory to save results (metadata of model, loss at each epoch, the model itself).
+
+```bash
+> python main.py --help
+usage: main.py [-h] -E EPOCHS -L LEARNING -B BSIZE -D DROPOUT -M RDIR -N NOTES
+               [--validate VALIDATE]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  -E EPOCHS            epochs
+  -L LEARNING          dropout rate
+  -B BSIZE             batch size
+  -D DROPOUT           dropout rate
+  -M RDIR              directory for results
+  -N NOTES             notes
+  --validate VALIDATE  validate model with tests
+```
+
+
+A `main2.py` file was developed to make it easier to 
+
 
 ## Parameters
 
