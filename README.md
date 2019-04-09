@@ -42,7 +42,9 @@ optional arguments:
 ```
 
 
-A `main2.py` file was developed to make it easier to 
+A `main2.py` file was developed to make it easier to test the model on different stages of the training.
+From 20 epochs, the model is saved every 10 epochs.
+A `process.py` file receives models from a given architecture and videos to be processed.
 
 
 ## Parameters
@@ -63,6 +65,11 @@ Model C = 04_04_2019__15_14
 
 ## Results
 ### Dataset
+![Model A loss](report/modelA_loss.png?raw=true "Title")
+![Model B loss](report/modelB_loss.png?raw=true "Title")
+![Model C loss](report/modelC_loss.png?raw=true "Title")
+
+
 ![Model A](report/05_inference.gif?raw=true "Title")
 
 ![Model B](report/03_inference.gif?raw=true "Title")
