@@ -25,7 +25,7 @@ The unit tests are still executed in `main.py`.
 The model parameters are now received as command line arguments.
 The available arguments are: epochs, dropout rate, learning rate, batch size, directory to save results (metadata of model, loss at each epoch, the model itself).
 
-```bash
+```
 > python main.py --help
 usage: main.py [-h] -E EPOCHS -L LEARNING -B BSIZE -D DROPOUT -M RDIR -N NOTES
                [--validate VALIDATE]
