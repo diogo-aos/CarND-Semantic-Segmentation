@@ -65,9 +65,9 @@ Model C = 04_04_2019__15_14
 
 ## Results
 ### Dataset
-![Model A loss](report/modelA_loss.png?raw=true "Title")
-![Model B loss](report/modelB_loss.png?raw=true "Title")
-![Model C loss](report/modelC_loss.png?raw=true "Title")
+![Model A loss](report/05_loss.png?raw=true "Title")
+![Model B loss](report/03_loss.png?raw=true "Title")
+![Model C loss](report/04_loss.png?raw=true "Title")
 
 
 ![Model A](report/05_inference.gif?raw=true "Title")
