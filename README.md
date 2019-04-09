@@ -9,7 +9,8 @@ Download the [Kitti Road dataset](http://www.cvlibs.net/datasets/kitti/eval_road
 
 
 ## Architecture
-Essentially, this project reproduced the architecture of X.
+Essentially, this project reproduced the architecture of the original paper [Fully Convolutional Networks for Semantic Segmentation](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf).
+X.
 A VGG16 network pre-trained on ImageNet was converted to a Fully Convolutional Network.
 The last fully connected layers were replaced by 1x1 convolutions with depth equal to the number of classes (in this case 2, road/not-road).
 Afterwards, transposed convolutions are used for upsampling.
@@ -48,10 +49,17 @@ A `process.py` file receives models from a given architecture and videos to be p
 
 
 ## Parameters
-
+<!---
 Model A = 05_04_2019__10_25
 Model B = 03_04_2019__15_14
 Model C = 04_04_2019__15_14
+--->
+
+Several parameters were experimented with.
+This report will focus on 3 architectures, described on the table below.
+Models for epochs 20,30,40 were also saved and tested on.
+Their performance was inferior and the results are not included.
+
 
 | Parameter     | Model A | Model B | Model C |
 | ---------     | -----   | ------- | ------- |
@@ -64,33 +72,43 @@ Model C = 04_04_2019__15_14
 
 
 ## Results
+
 ### Dataset
 ![Model A loss](report/05_loss.png?raw=true "Title")
 ![Model B loss](report/03_loss.png?raw=true "Title")
 ![Model C loss](report/04_loss.png?raw=true "Title")
 
 
-![Model A](report/05_inference.gif?raw=true "Title")
-
-![Model B](report/03_inference.gif?raw=true "Title")
-
-![Model C](report/04_inference.gif?raw=true "Title")
+Inference results on the test dataset can be observed in this [Youtube video](https://youtu.be/7sT-jydE_E8).
 
 The best results were produced by *model B*.
 *Model A* produced similar results, but the labeled pixels were more disperse.
-*Model C* produced results with 
+*Model C* produced results with a lot more false positives.
 
 ### Collected video
-#### Foz
-![Model A](report/05_processed_model50_foz_crop.gif?raw=true "Title")
-![Model B](report/03_processed_model50_foz_crop.gif?raw=true "Title")
-![Model C](report/04_processed_model50_foz_crop.gif?raw=true "Title")
+2 videos were recorded using 20MP Sony Exmor RS sensor.
+Both videos were recorded with the phone handheld.
+The windshield is dirty on both videos.
+These videos are called `Foz` and `Neuronios`.
+The light differs significantly on both videos.
+The performance of the three models above in both videos can be seen in this [Youtube video](https://youtu.be/0TAYRCinuVs).
 
-#### Neuronios
-![Model A](report/05_processed_model50_neuronios_crop.gif?raw=true "Title")
-![Model B](report/03_processed_model50_neuronios_crop.gif?raw=true "Title")
-![Model C](report/04_processed_model50_neuronios_crop.gif?raw=true "Title")
+The performance in the `Neuronios` video is awful.
+Model A and B perform a little better in the sense there are a lot fewer false positives.
+The light conditions in `Foz` are more similar to those in the training dataset, which might explain the better results.
+Model B performed best in `Foz`, as in the test dataset.
+Model A performs slightly worse than B, but the labeled pixels are more disperse, as previously observed.
+Model C, once again, has lots of false positives.
 
-## Considerations
+Both videos had to be cropped to keep the aspect ratio after they go through the pipeline.
+Without maintaining the aspect ratio, the results are completely unusable.
+
+## Reflections
+Some tools, that don't involve changing the model itself, could prove useful improving the performance.
+The first obvious tool is to use some pre-processing.
+I believe pre-processing would be specially impactful on the collected dataset (the 2 homemade videos).
+In this project, no pre-processing was used.
+Another tool is dataset augmentation.
+
 
 
