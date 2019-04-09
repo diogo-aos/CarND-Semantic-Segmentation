@@ -79,10 +79,11 @@ Their performance was inferior and the results are not included.
 ## Results
 
 ### Dataset
+<!---
 ![Model A loss](report/05_loss.png?raw=true "Title")
 ![Model B loss](report/03_loss.png?raw=true "Title")
 ![Model C loss](report/04_loss.png?raw=true "Title")
-
+--->
 
 Inference results on the test dataset can be observed in this [Youtube video](https://youtu.be/7sT-jydE_E8).
 
